@@ -12,14 +12,11 @@ COPY text_preprocessing.py ${WORKDIR}
 COPY KN.joblib ${WORKDIR}
 
 
-RUN apt update -y && sudo apt upgrade -y && \
-    apt-get install -y wget build-essential checkinstall  libreadline-gplv2-dev  libncursesw5-dev  libssl-dev  libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev && \
-    cd /usr/src && \
-    sudo wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz && \
-    sudo tar xzf Python-3.9.2.tgz && \
-    cd Python-3.9.2 && \
-    sudo ./configure --enable-optimizations && \
-    sudo make altinstall
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt install -y python3.9.2
 
 RUN pip3 install --no-cache-dir -r ${WORKDIR}/requirements.txt \
     && pip3 download --no-cache-dir --use-deprecated=legacy-resolver --dest /tmp/dataflow-requirements-cache -r ${WORKDIR}/requirements.txt
