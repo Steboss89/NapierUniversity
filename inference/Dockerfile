@@ -11,16 +11,20 @@ COPY prediction.py ${WORKDIR}
 COPY text_preprocessing.py ${WORKDIR}
 COPY KN.joblib ${WORKDIR}
 
-RUN apt-get update \
-    && apt-get install -y libffi-dev git \
-    && rm -rf /var/lib/apt/lists/* \
-    # Upgrade pip and install the requirements.
-    && pip install --no-cache-dir --upgrade pip
 
-RUN pip install --no-cache-dir -r ${WORKDIR}/requirements.txt \
-    && pip download --no-cache-dir --use-deprecated=legacy-resolver --dest /tmp/dataflow-requirements-cache -r ${WORKDIR}/requirements.txt
+RUN apt update -y && sudo apt upgrade -y && \
+    apt-get install -y wget build-essential checkinstall  libreadline-gplv2-dev  libncursesw5-dev  libssl-dev  libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev && \
+    cd /usr/src && \
+    sudo wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz && \
+    sudo tar xzf Python-3.9.2.tgz && \
+    cd Python-3.9.2 && \
+    sudo ./configure --enable-optimizations && \
+    sudo make altinstall
 
-RUN python -c "import nltk; nltk.download('punkt', download_dir='/usr/share/nltk_data')"
+RUN pip3 install --no-cache-dir -r ${WORKDIR}/requirements.txt \
+    && pip3 download --no-cache-dir --use-deprecated=legacy-resolver --dest /tmp/dataflow-requirements-cache -r ${WORKDIR}/requirements.txt
+
+RUN python3 -c "import nltk; nltk.download('punkt', download_dir='/usr/share/nltk_data')"
 ENV NLTK_DATA="/usr/share/nltk_data"
 ENV FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE="${WORKDIR}/requirements.txt"
 ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/inference_pipeline.py"
