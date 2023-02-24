@@ -1,5 +1,5 @@
 from apache_beam import DoFn
-from sklearn.externals import joblib
+import joblib
 import logging 
 
 
