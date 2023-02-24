@@ -2,7 +2,7 @@
 set -e
 
 
-PROJECT="NapierUniversity"
+PROJECT="napieruniversity"
 PIPELINE_NAME="napierpipeline"
 DATAFLOW_GCS_LOCATION="gs://napierpipeline/templates/template.json"
 
