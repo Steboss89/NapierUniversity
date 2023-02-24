@@ -16,7 +16,8 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt install -y python3.9.2
+    apt install -y python3.9 \
+    apt-get install python3-pip
 
 RUN pip3 install --no-cache-dir -r ${WORKDIR}/requirements.txt \
     && pip3 download --no-cache-dir --use-deprecated=legacy-resolver --dest /tmp/dataflow-requirements-cache -r ${WORKDIR}/requirements.txt
