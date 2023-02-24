@@ -17,8 +17,6 @@ RUN apt-get update \
     # Upgrade pip and install the requirements.
     && pip install --no-cache-dir --upgrade pip
 
-RUN python3 --version 
-
 RUN apt update; \
 apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev; \
 wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz; \
@@ -26,10 +24,10 @@ tar -zxvf Python-3.9.2.tgz; \
 cd Python-3.9.2; \
 ./configure --prefix=/usr/local/python3; \
 make && make install; \
-ln -sf /usr/local/python3/bin/python3.9 /usr/bin/python3; \
-ln -sf /usr/local/python3/bin/pip3.9 /usr/bin/pip3
+ln -sf /usr/local/python3/bin/python3.9 /usr/local/bin/python3; \
+ln -sf /usr/local/python3/bin/pip3.9 /usr/local/bin/pip3
 
-RUN python3 --version
+
 
 RUN pip3 install --no-cache-dir -r ${WORKDIR}/requirements.txt \
     && pip3 download --no-cache-dir --use-deprecated=legacy-resolver --dest /tmp/dataflow-requirements-cache -r ${WORKDIR}/requirements.txt
