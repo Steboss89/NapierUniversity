@@ -21,5 +21,5 @@ gcloud dataflow flex-template run ${PIPELINE_NAME} \
 --worker-machine-type=n1-standard-2 \
 --max-workers=2  \
 --num-workers=1  \
---temp-location=gs://dataflow-temp/tmp \
---staging-location=gs://dataflow-stag/staging
+--temp-location=gs://tempbucket5/tmp \
+--staging-location=gs://stagingbucket3/staging
