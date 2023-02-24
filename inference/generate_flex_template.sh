@@ -6,11 +6,11 @@ function create_flex_template() {
 
   echo "${TEMPLATE_IMAGE}"
   echo "${TEMPLATE_PATH}"
+  gcloud config set project 424791427488
 
   gcloud dataflow flex-template build "${TEMPLATE_PATH}" \
   --image "${TEMPLATE_IMAGE}" \
   --sdk-language  "PYTHON" \
-  --project NapierUnviersity \
   --enable-streaming-engine
 }
 
