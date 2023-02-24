@@ -11,7 +11,7 @@ echo "Job Name/Pipeline Name ${PIPELINE_NAME}"
 echo "Dataflow GCS location ${DATAFLOW_GCS_LOCATION}"
 
 GCP_PROJECT_ID="napieruniversity"
-
+gcloud config set project napieruniversity
 
 gcloud dataflow flex-template run ${PIPELINE_NAME} \
 --project=${PROJECT} \
