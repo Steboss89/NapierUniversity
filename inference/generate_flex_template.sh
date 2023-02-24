@@ -9,7 +9,7 @@ function create_flex_template() {
 
   gcloud dataflow flex-template build "${TEMPLATE_PATH}" \
   --image "${TEMPLATE_IMAGE}" \
-  --sdk-language "${SDK_LANGUAGE}" \
+  --sdk-language  "PYTHON" \
   --enable-streaming-engine
 }
 
