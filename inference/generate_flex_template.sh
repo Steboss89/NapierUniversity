@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 function create_flex_template() {
-  TEMPLATE_IMAGE="eu.gcr.io/napierpipeline"
+  TEMPLATE_IMAGE="eu.gcr.io/napieruniversity/napierpipeline:latest"
   TEMPLATE_PATH="gs://napierpipeline/templates/template.json"
 
   echo "${TEMPLATE_IMAGE}"
@@ -15,7 +15,7 @@ function create_flex_template() {
 
 function push_docker_image_to_gcr(){
   echo "Creating Docker image"
-  TEMPLATE_IMAGE="eu.gcr.io/napierpipeline"
+  TEMPLATE_IMAGE="eu.gcr.io/napieruniversity/napierpipeline:latest"
   docker build -t "${TEMPLATE_IMAGE}" -f Dockerfile .
   gcloud config set project 424791427488
   gcloud auth configure-docker eu.gcr.io --quiet
