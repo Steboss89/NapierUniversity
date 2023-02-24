@@ -6,7 +6,7 @@ function create_flex_template() {
 
   echo "${TEMPLATE_IMAGE}"
   echo "${TEMPLATE_PATH}"
-  gcloud config set project 424791427488
+  gcloud config set project napieruniversity
 
   gcloud dataflow flex-template build "${TEMPLATE_PATH}" \
   --image "${TEMPLATE_IMAGE}" \
