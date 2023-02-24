@@ -6,7 +6,7 @@ import logging
 class Predict(DoFn):
     def __init__(self):
         super().__init__()
-        self.model = joblib.load("KN.joblib", "rb")
+        self.model = joblib.load("KN.joblib", "r")
 
     def process(self, element, *args, **kwargs):
         logger = logging.getLogger().setLevel(logging.INFO)
