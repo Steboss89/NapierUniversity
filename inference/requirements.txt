@@ -11,3 +11,4 @@ nltk==3.8.1
 numpy
 pandas
 scikit-learn==1.2.1
+scipy
