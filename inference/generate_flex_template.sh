@@ -17,7 +17,7 @@ function push_docker_image_to_gcr(){
   echo "Creating Docker image"
   TEMPLATE_IMAGE="eu.gcr.io/napierpipeline"
   docker build -t "${TEMPLATE_IMAGE}" -f Dockerfile .
-  gcloud config set project NapierUniversity
+  gcloud config set project 424791427488
   gcloud auth configure-docker eu.gcr.io --quiet
   gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
   docker push "${TEMPLATE_IMAGE}"
