@@ -1,3 +1,4 @@
+# to run the job python3 inference_pipeline.py  --runner DataflowRunner --project napieruniversity --region europe-west1 --temp_location gs://tempbucket5/tmp --staging_location gs://stagingbucket3/staging
 import apache_beam as beam 
 from apache_beam import DoFn, ParDo, io, Map, Pipeline
 from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions, StandardOptions
