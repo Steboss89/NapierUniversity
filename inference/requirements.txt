@@ -1,8 +1,8 @@
-apache-beam
+apache_beam[gcp]==2.40.0
 joblib
 matplotlib
-nltk
+nltk==3.7
 numpy
 pandas
 scikit-learn
-scipy
+scipy==1.7.3
