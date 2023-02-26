@@ -2,8 +2,8 @@
 import apache_beam as beam 
 from apache_beam import DoFn, ParDo, io, Map, Pipeline
 from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions, StandardOptions
-import text_preprocessing
-import prediction
+from inference.text_preprocessing import TextProcessing
+from inference.prediction import Predict
 import argparse
 import logging
 
@@ -17,8 +17,8 @@ def run(argv=None):
     p = Pipeline(options=pipeline_options)
     spam_pipeline = (p 
                     | "Read input text from PubSub" >> io.ReadFromPubSub(subscription="projects/napieruniversity/subscriptions/scamspaminputs-sub", with_attributes=True )
-                    | "Preprocessing" >> ParDo(text_preprocessing.TextProcessing())
-                    | "Predict" >> ParDo(prediction.Predict())
+                    | "Preprocessing" >> ParDo(TextProcessing())
+                    | "Predict" >> ParDo(Predict())
                     )
     p.run()
 
