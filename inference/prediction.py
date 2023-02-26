@@ -8,7 +8,7 @@ import numpy as np
 class Predict(DoFn):
     def __init__(self):
         super().__init__()
-        self.json_file = "LR.json"
+        self.json_file = "inference/LR.json"
 
     def logistic_regression_from_json(jstring):
         data = json.loads(jstring)
