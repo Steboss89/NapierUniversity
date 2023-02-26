@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from apache_beam import DoFn
 
 
+
 class TextProcessing(DoFn):
 
     def process(self, element, *args, **kwargs):
