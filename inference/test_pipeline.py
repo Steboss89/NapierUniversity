@@ -6,7 +6,6 @@ import argparse
 import logging
 
 import joblib
-import string 
 import numpy as np 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -27,7 +26,7 @@ class TextProcessing(DoFn):
         """
          # theoretically this is wrong, we should have a saved TfIdF 
         vectorizer = TfidfVectorizer() 
-        vectors = vectorizer.fit_transform(str(element))
+        vectors = vectorizer.fit_transform([str(element)])
 
         yield vectors
         
