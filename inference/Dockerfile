@@ -9,7 +9,7 @@ COPY requirements.txt ${WORKDIR}/requirements.txt
 COPY inference_pipeline.py ${WORKDIR}
 COPY prediction.py ${WORKDIR}
 COPY text_preprocessing.py ${WORKDIR}
-COPY KN.joblib ${WORKDIR}
+COPY LR.json ${WORKDIR}
 
 RUN apt-get update \
     && apt-get install -y libffi-dev git \
