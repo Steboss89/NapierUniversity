@@ -12,9 +12,26 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 class Predict(DoFn):     
 
     def process(self, element, *args, **kwargs):
-        self.model = joblib.load("KN.joblib", "r")
+        from google.cloud import storage
+        import joblib
+        from tempfile import TemporaryFile
+        import logging
+
+        storage_client = storage.Client()
+        bucket_name= "testingmodels"
+        model_bucket="KN.joblib"
+
+        bucket = storage_client.get_bucket(bucket_name)
+        #select bucket file
+        blob = bucket.blob(model_bucket)
+        with TemporaryFile() as temp_file:
+            #download blob into temp file
+            blob.download_to_file(temp_file)
+            temp_file.seek(0)
+            #load into joblib
+            model=joblib.load(temp_file)
         logger = logging.getLogger().setLevel(logging.INFO)
-        prediction = self.model.predict(element)
+        prediction = model.predict(element)
         logger.log(f"Element {element} - Prediction {prediction}")
         yield prediction
 
