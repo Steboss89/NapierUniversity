@@ -11,6 +11,20 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import joblib
+import json
+
+def logistic_regression_to_json(lrmodel, file=None):
+    if file is not None:
+        serialize = lambda x: json.dump(x, file)
+    else:
+        serialize = json.dumps
+    data = {}
+    data['init_params'] = lrmodel.get_params()
+    data['model_params'] = mp = {}
+    for p in ('coef_', 'intercept_','classes_', 'n_iter_'):
+        mp[p] = getattr(lrmodel, p).tolist()
+    return serialize(data)
+
 
 if __name__=="__main__":
     input_data = "dataset/SMSSpamCollection"
@@ -43,6 +57,11 @@ if __name__=="__main__":
         # save model 
         filename = f"saved_models/{k}.joblib"
         joblib.dump(v, filename)
+        if k=="LR":
+            lrjson=logistic_regression_to_json(v)
+            
+            with open('saved_models/LR.json', 'w') as outfile:
+                json.dump(lrjson, outfile)
 
 
 
